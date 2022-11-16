@@ -10,6 +10,15 @@ body {
   background-color: #dcdbd1;
 }
 
+/* GENERALS */
+i:hover {
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+}
+
 .container {
   --bkgc-profiles: #eaeaea;
   --height-profiles: 50px;
@@ -27,6 +36,7 @@ body {
   height: 100%;
   width: 30%;
   background-color: gold;
+  border-right: 1px solid #e0e0e0;
 }
 
 .messages {
@@ -105,10 +115,6 @@ body {
   padding: 10px;
 }
 
-.search input:focus {
-  outline: none;
-}
-
 .static {
   min-height: 200px;
   background-color: white;
@@ -136,6 +142,7 @@ body {
 
 .column .friendlist li:hover {
   cursor: pointer;
+  background-color: rgb(233, 233, 233);
 }
 
 .column .friendlist img {
@@ -182,6 +189,7 @@ body {
 
 .chat {
   display: none;
+  padding: 30px;
 }
 
 .chat.active {
@@ -189,9 +197,56 @@ body {
 }
 
 .chat li {
+  display: flex;
   list-style-type: none;
+  margin: 2rem 0;
 }
+
+.msg-cloud {
+  background-color: white;
+  min-width: 300px;
+  max-width: 50%;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.msg-cloud p {
+  width: 100%;
+}
+.sent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.msg-cloud.sent {
+  background-color: #d5f9ba;
+}
+
+.date {
+  font-size: 0.7em;
+  color: #b6c7ba;
+  margin-top: 0.5rem;
+  text-align: end;
+}
+
 .write {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   min-height: var(--write-height);
   background-color: #f3eeea;
+}
+
+.write input {
+  font-size: 20px;
+  padding: 10px;
+  flex: 1 1 0;
+  border: none;
+}
+
+.write i {
+  font-size: 25px;
+  text-align: center;
+  padding: 0 30px;
 }
