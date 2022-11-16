@@ -51,14 +51,30 @@
       </div>
       <div class="friendlist">
         <ul>
-          <li v-for="(item, index) in contacts" :key="item.avatar">
+          <li v-for="(item, index) in contacts" :key="item.avatar" @click="activeIndex = index">
             <img :src="'img/' + item.avatar + '.jpg'" alt="">
             <span>{{ item.name }}</span>
           </li>
         </ul>
       </div>
     </div>
-    <div class="messages"></div>
+
+
+    <div class="messages">
+      <div class="active-friend">
+        <div class="friend" v-for="(item, index) in contacts" :key="item.avatar"
+          :class="{active: index === activeIndex}">
+          <img :src="'img/' + item.avatar + '.jpg'" alt="">
+          <span>{{ item.name }}</span>
+        </div>
+      </div>
+      <div class="chat">
+
+      </div>
+      <div class="write">
+
+      </div>
+    </div>
   </div>
 </body>
 
