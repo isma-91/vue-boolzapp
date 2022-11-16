@@ -69,12 +69,14 @@
         </div>
       </div>
       <div class="chat-container">
+        <div class="chat" v-for="(item, index) in contacts" :key="item.avatar" :class="{active: index === activeIndex}">
+          <ul>
+            <li v-for="itemmessage in item.messages" :key="item.date">
+              {{itemmessage.message }}
+            </li>
+          </ul>
+        </div>
 
-        <ul class="chat" v-for="(item, index) in contacts" :key="item.avatar" :class="{active: index === activeIndex}">
-          <li v-for="index in item.messages.length" :key="item.date">
-            {{ contacts.messages.message }}
-          </li>
-        </ul>
 
       </div>
       <div class="write">

@@ -179,11 +179,18 @@ body {
   background-image: url(../img/mine.jpg);
   height: calc(100% - var(--active-friend-height) - var(--write-height));
 }
-/* 
+
 .chat {
   display: none;
-} */
+}
 
+.chat.active {
+  display: block;
+}
+
+.chat li {
+  list-style-type: none;
+}
 .write {
   min-height: var(--write-height);
   background-color: #f3eeea;
