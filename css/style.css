@@ -3,3 +3,133 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  display: flex;
+  height: 100vh;
+  background-color: #dcdbd1;
+}
+
+.container {
+  --bkgc-profiles: #eaeaea;
+  --height-profiles: 50px;
+  display: flex;
+  height: 95vh;
+  width: 1300px;
+  margin: auto;
+  border: 2px solid black;
+}
+
+.column {
+  --padding: 10px;
+  --margin-right-icon: 15px;
+  height: 100%;
+  width: 35%;
+  background-color: gold;
+}
+
+.messages {
+  height: 100%;
+  width: 65%;
+  background-color: salmon;
+}
+
+.user-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bkgc-profiles);
+  padding: var(--padding);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-img {
+  height: var(--height-profiles);
+  aspect-ratio: 1 / 1;
+  margin-right: var(--margin-right-icon);
+}
+
+.user-img img {
+  width: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.functions i {
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.notifications {
+  display: flex;
+  align-items: center;
+  padding: var(--padding);
+  background-color: #8edafc;
+}
+
+.notifications a {
+  color: grey;
+}
+
+.icon {
+  background-color: white;
+  font-size: 30px;
+  padding: 10px;
+  border-radius: 100px;
+  color: #8edafc;
+  margin-right: var(--margin-right-icon);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  padding: var(--padding);
+  background-color: #fafafa;
+}
+
+.search i {
+  font-size: 20px; /*TODO: creare variabile per farli tutti uguali  */
+  margin-right: var(--margin-right-icon);
+  margin-left: 15px;
+}
+
+.search input {
+  border: none;
+  width: 100%;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.static {
+  min-height: 200px;
+  background-color: white;
+  /*TODO:da rivedere per il calcolo del'altezza della friendlist */
+}
+
+.friendlist {
+  background-color: white;
+  display: flex;
+  height: calc(100% - 200px);
+  overflow-y: scroll;
+  /*TODO:da rivedere per il calcolo del'altezza della friendlist con lo static sopra*/
+}
+
+.column .friendlist li {
+  padding: var(--padding);
+  display: flex;
+  align-items: center;
+}
+.column .friendlist img {
+  height: var(--height-profiles);
+  margin-right: var(--margin-right-icon);
+  border-radius: 100px;
+  overflow: hidden;
+}

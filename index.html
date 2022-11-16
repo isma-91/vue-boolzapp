@@ -51,7 +51,10 @@
       </div>
       <div class="friendlist">
         <ul>
-          <li></li>
+          <li v-for="(item, index) in contacts" :key="item.avatar">
+            <img :src="'img/' + item.avatar + '.jpg'" alt="">
+            <span>{{ item.name }}</span>
+          </li>
         </ul>
       </div>
     </div>
