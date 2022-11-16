@@ -175,10 +175,14 @@ body {
   align-items: center;
 }
 
-.chat {
+.chat-container {
   background-image: url(../img/mine.jpg);
   height: calc(100% - var(--active-friend-height) - var(--write-height));
 }
+/* 
+.chat {
+  display: none;
+} */
 
 .write {
   min-height: var(--write-height);
