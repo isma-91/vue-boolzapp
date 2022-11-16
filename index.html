@@ -18,7 +18,45 @@
 </head>
 
 <body>
-  <div id="root" class="container"></div>
+  <div id="root" class="container">
+    <div class="column">
+      <div class="static">
+        <div class="user-profile">
+          <div class="user-info">
+            <div class="user-img">
+              <img src="img/user.jpg" alt="">
+            </div>
+            <span>Jon Snow</span>
+          </div>
+          <div class="functions">
+            <i class="fa-solid fa-circle-notch"></i>
+            <i class="fa-solid fa-message"></i>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+        </div>
+        <div class="notifications">
+          <div class="icon">
+
+            <i class="fa-solid fa-bell-slash"></i>
+          </div>
+          <div class="action">
+            <p>Ricevi notifiche di nuovi messaggi</p>
+            <p><a href="#">Attiva notifiche desktop</a></p>
+          </div>
+        </div>
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i> <input type="text" name="search-friend" id="search-friend"
+            placeholder="Cerca o inizia una nuova chat">
+        </div>
+      </div>
+      <div class="friendlist">
+        <ul>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+    <div class="messages"></div>
+  </div>
 </body>
 
 </html>
