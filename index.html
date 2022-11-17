@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- GoogleFont -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     [v-cloak] {
       display: none;
@@ -32,7 +36,7 @@
           <div class="user-img">
             <img src="img/user.jpg" alt="">
           </div>
-          <span>Jon Snow</span>
+          <span class="bold">Jon Snow</span>
         </div>
         <div class="functions">
           <i class="fa-solid fa-circle-notch"></i>
@@ -65,7 +69,7 @@
             <img :src="'img/' + item.avatar + '.jpg'" alt="">
             <div class="friend-box">
               <div class="name-date">
-                <span>{{ item.name }}</span>
+                <span class="bold">{{ item.name }}</span>
                 <span class="list-date">{{ item.messages[item.messages.length - 1].date}}</span>
               </div>
 
@@ -80,10 +84,17 @@
     <!-- Right side / Active Chat -->
     <div class="messages">
       <div class="active-friend">
-        <div class="friend" v-for="(item, index) in contacts" :key="item.avatar"
-          :class="{active: index === activeIndex}">
-          <img :src="'img/' + item.avatar + '.jpg'" alt="">
-          <span>{{ item.name }}</span>
+        <div class="user-info">
+          <div class="friend" v-for="(item, index) in contacts" :key="item.avatar"
+            :class="{active: index === activeIndex}">
+            <img :src="'img/' + item.avatar + '.jpg'" alt="">
+            <span class="bold">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="functions">
+          <i class="fa-solid fa-circle-notch"></i>
+          <i class="fa-solid fa-message"></i>
+          <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
       </div>
       <div class="chat-container">

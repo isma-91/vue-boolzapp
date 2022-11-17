@@ -260,15 +260,24 @@ const app = new Vue({
     },
   },
   created() {
-    for (let i = 0; i < this.contacts.length; i++) {
-      this.obj = this.contacts[i];
-      // console.log(this.obj);
-      for (let y = 0; y < this.obj.messages[this.obj.messages.length]; y++) {
-        menuOpen = false;
-      }
-      console.log(this.obj.messages[this.obj.messages.length]);
-    }
-    // console.log(this.obj[this.obj.message.length].message);
+    // this.contacts.forEach((e, i) => {
+    //   e.foreach((msgs) => {
+    //     msgs.push({
+    //       menuOpen: false,
+    //     });
+    //   });
+    // });
+    // console.log(this.contacts);
+    // // for (let i = 0; i < this.contacts.length; i++) {
+    // //   // this.obj = this.contacts[i];
+    // //   // console.log(this.obj);
+    // //   console.log(this.contacts);
+    // // for (let y = 0; y < this.obj.messages[this.obj.messages.length]; y++) {
+    // //   menuOpen = false;
+    // // }
+    // // console.log(this.obj.messages[this.obj.messages.length]);
+    // // }
+    // // // console.log(this.obj[this.obj.message.length].message);
   },
 });
 

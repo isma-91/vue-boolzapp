@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: "Montserrat", sans-serif;
+}
+
 body {
   display: flex;
   height: 100vh;
@@ -21,15 +25,19 @@ input:focus {
 
 .container {
   --bkgc-profiles: #eaeaea;
+  --top-icons-color: #b6bbc4;
   --height-profiles: 50px;
   --padding: 10px;
   --margin-right-icon: 15px;
   display: flex;
-  height: 95vh;
+  height: 90vh;
   min-width: 900px;
   width: 1400px;
   margin: auto;
-  border: 2px solid black;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 .column {
@@ -72,6 +80,7 @@ input:focus {
 }
 
 .functions i {
+  color: var(--top-icons-color);
   margin: 0 10px;
   font-size: 20px;
 }
@@ -176,6 +185,8 @@ input:focus {
 .active-friend {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex: 1 1 auto;
   padding: var(--padding);
   height: var(--active-friend-height);
   background-color: var(--bkgc-profiles);
@@ -201,6 +212,7 @@ input:focus {
 .chat-container {
   background-image: url(../img/mine.jpg);
   height: calc(100% - var(--active-friend-height) - var(--write-height));
+  overflow-y: scroll;
 }
 
 .chat {
