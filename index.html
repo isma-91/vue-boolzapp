@@ -72,8 +72,17 @@
         <div class="chat" v-for="(item, index) in contacts" :key="item.avatar" :class="{active: index === activeIndex}">
           <ul>
             <!-- praticamente il ciclo è come sopra, però dobbiamo dargli un nome al primo valore diverso da quello sopra perchè se no succedono problemi. Poi ovviamente non si itera più su contacts, che sarebbe l'array di oggetti in generale, ma vi si accede con item.messages dove item è il valore che abbiamo "ricavato" con il ciclo sopra e al quale possiamo accedervi. Quindi poi stampiamo itemmessage, che sarebbe l'oggetto .message che va a prendere tutti i message di ogni oggetto itemmessage.. -->
-            <li v-for="itemMessage in item.messages" :key="item.date" :class="{sent: itemMessage.status === 'sent'}">
+            <li v-for="(itemMessage, pos) in item.messages" :key="item.date"
+              :class="{sent: itemMessage.status === 'sent'}">
               <div class="msg-cloud" :class="{sent: itemMessage.status === 'sent'}">
+                <div class="abso">
+                  <i class="fa-solid fa-angle-down" @click="showDropDown"></i>
+                  <div class="select" :class="{show: isShown}">
+                    <p>Informazioni messaggio</p>
+                    <p>Cancella messaggio</p>
+                  </div>
+                </div>
+
                 <p class="msg">{{itemMessage.message }}</p>
                 <p class="date"> {{itemMessage.date }}</p>
               </div>

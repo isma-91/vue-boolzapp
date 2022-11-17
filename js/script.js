@@ -205,12 +205,13 @@ const app = new Vue({
       status: "received",
     },
     delayAnswer: 1 * 1000,
+    isShown: false,
   },
   methods: {
     newMessage(i) {
       if (this.msg.message.trim()) {
         // console.log(this.msg.message);
-        console.log(this.data.getHours());
+        // console.log(this.data.getHours());
         this.msg.message = this.msg.message.trim();
         this.contacts[i].messages.push({
           ...this.msg,
@@ -235,6 +236,10 @@ const app = new Vue({
           "0" + this.data.getMinutes()
         ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
       });
+    },
+
+    showDropDown() {
+      this.isShown = !this.isShown;
     },
   },
 });
