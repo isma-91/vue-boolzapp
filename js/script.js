@@ -207,6 +207,7 @@ const app = new Vue({
     delayAnswer: 1 * 1000,
     isShown: false,
     search: "",
+    obj: {},
   },
   methods: {
     newMessage(i) {
@@ -257,6 +258,17 @@ const app = new Vue({
         }
       });
     },
+  },
+  created() {
+    for (let i = 0; i < this.contacts.length; i++) {
+      this.obj = this.contacts[i];
+      // console.log(this.obj);
+      for (let y = 0; y < this.obj.messages[this.obj.messages.length]; y++) {
+        menuOpen = false;
+      }
+      console.log(this.obj.messages[this.obj.messages.length]);
+    }
+    // console.log(this.obj[this.obj.message.length].message);
   },
 });
 
