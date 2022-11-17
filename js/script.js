@@ -37,6 +37,8 @@ const app = new Vue({
             date: "10/01/2020 15:30:55",
             message: "Hai portato a spasso il cane?",
             status: "sent",
+            isDropdownShown: false,
+            //TODO: Da togliere a Henri con il create non funziona ma se lo metto qui, e quindi la pagina lo trova subito allora è reattivo come dovrebbe, mentre col created si vede, cambia nella console, viene aggiunto il true e il false, ma no è reattivo.
           },
           {
             date: "10/01/2020 15:50:00",
@@ -205,7 +207,6 @@ const app = new Vue({
       status: "received",
     },
     delayAnswer: 1 * 1000,
-    isShown: false,
     search: "",
     obj: {},
   },
@@ -240,8 +241,9 @@ const app = new Vue({
       });
     },
 
-    showDropDown() {
-      this.isShown = !this.isShown;
+    showDropDown(msg) {
+      msg.isDropdownShown = !msg.isDropdownShown;
+      console.log(msg);
     },
 
     searchFriend() {
@@ -260,13 +262,12 @@ const app = new Vue({
     },
   },
   created() {
-    // this.contacts.forEach((e, i) => {
-    //   e.foreach((msgs) => {
-    //     msgs.push({
-    //       menuOpen: false,
-    //     });
-    //   });
-    // });
+    this.contacts.forEach((contact, i) => {
+      // console.log(contact);
+      contact.messages.forEach((message) => {
+        message.isDropdownShown = false;
+      });
+    });
     // console.log(this.contacts);
     // // for (let i = 0; i < this.contacts.length; i++) {
     // //   // this.obj = this.contacts[i];

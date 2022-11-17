@@ -111,8 +111,9 @@
               :class="{sent: itemMessage.status === 'sent'}">
               <div class="msg-cloud" :class="{sent: itemMessage.status === 'sent'}">
                 <div class="abso">
-                  <i class="fa-solid fa-angle-down" @click="showDropDown"></i>
-                  <div class="select" :class="{show: isShown}">
+                  <i class="fa-solid fa-angle-down" @click="showDropDown(itemMessage)"></i>
+                  <!-- <p>{{ itemMessage.isDropdownShown }}</p> -->
+                  <div class="select" :class="{show: itemMessage.isDropdownShown}">
                     <p>Informazioni messaggio</p>
                     <p>Cancella messaggio</p>
                   </div>
