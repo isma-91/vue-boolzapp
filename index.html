@@ -88,12 +88,18 @@
           <div class="friend" v-for="(item, index) in contacts" :key="item.avatar"
             :class="{active: index === activeIndex}">
             <img :src="'img/' + item.avatar + '.jpg'" alt="">
-            <span class="bold">{{ item.name }}</span>
+            <div>
+              <p class="bold">{{ item.name }}</p>
+              <p class="list-date">
+                Ultimo accesso il {{ item.messages[item.messages.length - 1].date}}
+              </p>
+            </div>
+
           </div>
         </div>
         <div class="functions">
-          <i class="fa-solid fa-circle-notch"></i>
-          <i class="fa-solid fa-message"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-paperclip"></i>
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
       </div>
