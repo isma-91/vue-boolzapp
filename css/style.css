@@ -131,8 +131,12 @@ input:focus {
 .column .friendlist li {
   padding: var(--padding);
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  width: 100%;
+}
+
+.name-date {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -150,13 +154,16 @@ input:focus {
   margin-right: var(--margin-right-icon);
   border-radius: 100px;
   overflow: hidden;
+  display: inline-block;
 }
 
 .friend-box {
   line-height: 1.3rem;
+  flex: 1 1 auto;
 }
 
-.last-message {
+.last-message,
+.list-date {
   color: #bbb9c0;
   font-size: 0.8rem;
 }
