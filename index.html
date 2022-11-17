@@ -83,9 +83,10 @@
 
 
       </div>
-      <div class="write">
+      <div class="write" v-for="(objs, i) in contacts" :key="objs.avatar" :class="{active: i === activeIndex}">
         <i class="fa-regular fa-face-smile"></i>
-        <input type="text" name="personal-message" id="personal-message" placeholder="Scrivi un messaggio">
+        <input type="text" placeholder="Scrivi un messaggio" @keyup.enter="newMessage(i), autoAnswerTimer(i)"
+          v-model="msg.message">
         <i class="fa-solid fa-microphone"></i>
       </div>
     </div>

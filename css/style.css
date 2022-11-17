@@ -231,6 +231,10 @@ input:focus {
 }
 
 .write {
+  display: none;
+}
+
+.write.active {
   display: flex;
   align-items: center;
   justify-content: space-around;

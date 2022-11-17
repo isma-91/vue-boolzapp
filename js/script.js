@@ -191,6 +191,50 @@ const app = new Vue({
       },
     ],
     activeIndex: 0,
+    data: new Date(),
+    msg: {
+      // Perchè scritto qui non funziona e mi tocca scriverlo sotto nei methods?
+      // date: this.data.getHours() + ":" + this.data.getMinutes(),
+      message: "",
+      status: "sent",
+    },
+    autoMsg: {
+      // Perchè scritto qui non funziona e mi tocca scriverlo sotto nei methods?
+      // date: this.data.getHours() + ":" + this.data.getMinutes(),
+      message: "Ok!",
+      status: "received",
+    },
+    delayAnswer: 1 * 1000,
   },
-  methods: {},
+  methods: {
+    newMessage(i) {
+      if (this.msg.message.trim()) {
+        // console.log(this.msg.message);
+        console.log(this.data.getHours());
+        this.msg.message = this.msg.message.trim();
+        this.contacts[i].messages.push({
+          ...this.msg,
+          date: `${this.data.getDate()}/${this.data.getMonth()}/${this.data.getFullYear()} 
+          ${("0" + this.data.getHours()).slice(-2)}:${(
+            "0" + this.data.getMinutes()
+          ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
+        });
+        this.msg.message = "";
+      }
+    },
+
+    autoAnswerTimer(i) {
+      setTimeout(() => this.autoAnswer(i), this.delayAnswer);
+    },
+
+    autoAnswer(i) {
+      this.contacts[i].messages.push({
+        ...this.autoMsg,
+        date: `${this.data.getDate()}/${this.data.getMonth()}/${this.data.getFullYear()} 
+        ${("0" + this.data.getHours()).slice(-2)}:${(
+          "0" + this.data.getMinutes()
+        ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
+      });
+    },
+  },
 });
