@@ -206,6 +206,7 @@ const app = new Vue({
     },
     delayAnswer: 1 * 1000,
     isShown: false,
+    search: "",
   },
   methods: {
     newMessage(i) {
@@ -241,5 +242,33 @@ const app = new Vue({
     showDropDown() {
       this.isShown = !this.isShown;
     },
+
+    searchFriend() {
+      console.log(this.search);
+      this.contacts.forEach((e, i) => {
+        if (
+          this.contacts[i].name
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        ) {
+          this.contacts[i].visible = true;
+        } else {
+          this.contacts[i].visible = false;
+        }
+      });
+    },
   },
 });
+
+// Ciclo Brutto
+// for (let i = 0; i < this.contacts.length; i++) {
+//   if (
+//     this.contacts[i].name
+//       .toLowerCase()
+//       .includes(this.search.toLowerCase())
+//   ) {
+//     this.contacts[i].visible = true;
+//   } else {
+//     this.contacts[i].visible = false;
+//   }
+// }

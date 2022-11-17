@@ -15,45 +15,53 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="root" class="container">
+  <div id="root" class="container" v-cloak>
     <div class="column">
-      <div class="static">
-        <div class="user-profile">
-          <div class="user-info">
-            <div class="user-img">
-              <img src="img/user.jpg" alt="">
-            </div>
-            <span>Jon Snow</span>
+      <div class="user-profile">
+        <div class="user-info">
+          <div class="user-img">
+            <img src="img/user.jpg" alt="">
           </div>
-          <div class="functions">
-            <i class="fa-solid fa-circle-notch"></i>
-            <i class="fa-solid fa-message"></i>
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </div>
+          <span>Jon Snow</span>
         </div>
-        <div class="notifications">
-          <div class="icon">
+        <div class="functions">
+          <i class="fa-solid fa-circle-notch"></i>
+          <i class="fa-solid fa-message"></i>
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+      </div>
+      <div class="notifications">
+        <div class="icon">
 
-            <i class="fa-solid fa-bell-slash"></i>
-          </div>
-          <div class="action">
-            <p>Ricevi notifiche di nuovi messaggi</p>
-            <p><a href="#">Attiva notifiche desktop</a></p>
-          </div>
+          <i class="fa-solid fa-bell-slash"></i>
         </div>
-        <div class="search">
-          <i class="fa-solid fa-magnifying-glass"></i> <input type="text" name="search-friend" id="search-friend"
-            placeholder="Cerca o inizia una nuova chat">
+        <div class="action">
+          <p>Ricevi notifiche di nuovi messaggi</p>
+          <p><a href="#">Attiva notifiche desktop</a></p>
         </div>
+      </div>
+      <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i> <input type="text" name="search-friend" id="search-friend"
+          placeholder="Cerca o inizia una nuova chat" v-model="search" @keyup="searchFriend">
       </div>
       <div class="friendlist">
         <ul>
-          <li v-for="(item, index) in contacts" :key="item.avatar" @click="activeIndex = index">
+          <li v-for="(item, index) in contacts" :key="item.avatar" @click="activeIndex = index"
+            :class="{novisible: item.visible === false}">
             <img :src="'img/' + item.avatar + '.jpg'" alt="">
-            <span>{{ item.name }}</span>
+            <div class="friend-box">
+              <p>{{ item.name }}</p>
+              <p class="last-message">
+                {{ item.messages[item.messages.length - 1].message }}</p>
+            </div>
           </li>
         </ul>
       </div>
@@ -89,9 +97,8 @@
             </li>
           </ul>
         </div>
-
-
       </div>
+      <!-- È corretto fare il v-for anche qui per "syncare" ciò che scrivo alla casella chat di chi ho selezionato sulla sinistra? -->
       <div class="write" v-for="(objs, i) in contacts" :key="objs.avatar" :class="{active: i === activeIndex}">
         <i class="fa-regular fa-face-smile"></i>
         <input type="text" placeholder="Scrivi un messaggio" @keyup.enter="newMessage(i), autoAnswerTimer(i)"

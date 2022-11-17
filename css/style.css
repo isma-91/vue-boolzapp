@@ -7,7 +7,7 @@
 body {
   display: flex;
   height: 100vh;
-  background-color: #dcdbd1;
+  background: linear-gradient(to bottom, #009688 15%, #dcdbd1 15% 100%);
 }
 
 /* GENERALS */
@@ -33,9 +33,10 @@ input:focus {
 }
 
 .column {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 30%;
-  background-color: gold;
   border-right: 1px solid #e0e0e0;
 }
 
@@ -115,18 +116,12 @@ input:focus {
   padding: 10px;
 }
 
-.static {
-  min-height: 200px;
-  background-color: white;
-  /*TODO:da rivedere per il calcolo del'altezza della friendlist */
-}
-
 .friendlist {
   background-color: white;
   display: flex;
-  height: calc(100% - 200px);
+  flex: 1 0 0;
+  /* Usiamo flex per non dare una misura fissa agli elementi sopra e poi fare il calc, così invece con il grow a 1 essendo il container generale in display column quest'ultimo elemento cresce fino a riempire tutto lo spazio che rimane, dato che gli altri elementi non hanno il grow attivo.*/
   overflow-y: scroll;
-  /*TODO:da rivedere per il calcolo del'altezza della friendlist con lo static sopra*/
 }
 
 .column .friendlist ul {
@@ -137,6 +132,7 @@ input:focus {
   padding: var(--padding);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   width: 100%;
 }
 
@@ -145,11 +141,24 @@ input:focus {
   background-color: rgb(233, 233, 233);
 }
 
+.column .friendlist li.novisible {
+  display: none;
+}
+
 .column .friendlist img {
   height: var(--height-profiles);
   margin-right: var(--margin-right-icon);
   border-radius: 100px;
   overflow: hidden;
+}
+
+.friend-box {
+  line-height: 1.3rem;
+}
+
+.last-message {
+  color: #bbb9c0;
+  font-size: 0.8rem;
 }
 
 .messages {
@@ -202,6 +211,7 @@ input:focus {
   margin: 2rem 0;
 }
 
+/* Problema con testo troppo lungo viene bruttino... come fare? */
 .msg-cloud {
   position: relative;
   background-color: white;
@@ -214,6 +224,7 @@ input:focus {
 .msg-cloud p {
   width: 100%;
 }
+
 .sent {
   display: flex;
   flex-direction: column;
