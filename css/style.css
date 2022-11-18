@@ -236,6 +236,10 @@ li {
   margin: 2rem 0;
 }
 
+.msg-cloud-container:hover .abso i {
+  display: block;
+}
+
 /* Problema con testo troppo lungo viene bruttino... come fare? */
 .msg-cloud {
   position: relative;
@@ -264,6 +268,11 @@ li {
   right: 10px;
 }
 
+.abso i {
+  color: var(--top-icons-color);
+  display: none;
+}
+
 .select {
   position: absolute;
   top: 90%;
@@ -283,6 +292,28 @@ li {
   background-color: rgb(235, 235, 235);
   cursor: pointer;
 }
+
+.delete:hover p {
+  transition: all 0.2s ease;
+  color: red;
+  font-weight: bold;
+  animation: 0.2s linear doodle;
+}
+@keyframes doodle {
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+/* Piccola prova per rispolverare in mo le transitions e le animations */
 
 .select.show {
   display: block;

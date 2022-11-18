@@ -117,11 +117,12 @@
               <div class="msg-cloud" :class="{sent: itemMessage.status === 'sent'}">
                 <div class="abso">
                   <i class="fa-solid fa-angle-down" @click="showDropDown(itemMessage)"></i>
-                  <!-- <p>{{ itemMessage.isDropdownShown }}</p> -->
                 </div>
                 <ul class="select" :class="{show: itemMessage.isDropdownShown}">
                   <li>Informazioni messaggio</li>
-                  <li>Cancella messaggio</li>
+                  <li class='delete' @click='deleteMessage(item.messages, pos)'>
+                    <p>Cancella messaggio</p>
+                  </li>
                 </ul>
                 <p class="msg">{{itemMessage.message }}</p>
                 <p class="date"> {{itemMessage.date }}</p>
