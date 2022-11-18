@@ -192,25 +192,33 @@ const app = new Vue({
         ],
       },
     ],
+    // Active index per "sincronizzare i contatti quando selezionati"
     activeIndex: 0,
+    // Date per mettere date e orari "reali" e aggiornati
     data: new Date(),
+    //Oggetto msg per poi esploderlo e pusharlo nell'array dei messaggi con la chiave msg collegata al campo di testo del messaggio.
     msg: {
       // Perchè scritto qui non funziona e mi tocca scriverlo sotto nei methods?
       // date: this.data.getHours() + ":" + this.data.getMinutes(),
       message: "",
       status: "sent",
     },
+    //Come sopra, ma messaggio automatico del computer con timer di 1 sec dopo il mio msg
     autoMsg: {
       // Perchè scritto qui non funziona e mi tocca scriverlo sotto nei methods?
       // date: this.data.getHours() + ":" + this.data.getMinutes(),
       message: "Ok!",
       status: "received",
     },
+    // Tempo per il setTimeout
     delayAnswer: 1 * 1000,
+    // Valore preso dall'input per la ricerca degli amici in friendlist
     search: "",
-    obj: {},
+    // Oggetto vuoto per la prova di poushare lo status del dropdown dei messaggi
+    // obj: {}, (not work)
   },
   methods: {
+    //Metodo per prendere il messaggio scritto dall'utente reale nella textarea dei messaggi, creare un oggetto, esploderlo e pusharlo nell'array dei messaggi. Si passa come argomento l'indice preso dal ciclo nell'HTML, così da sarepre in quale iesimo contatto pushare il messaggio.
     newMessage(i) {
       if (this.msg.message.trim()) {
         // console.log(this.msg.message);
@@ -226,11 +234,11 @@ const app = new Vue({
         this.msg.message = "";
       }
     },
-
+    // SetTimeout per la risposta automatica del computer, sempre passare come argomento l'indice preso dall'HTML per sapere dove mandare il messaggio
     autoAnswerTimer(i) {
       setTimeout(() => this.autoAnswer(i), this.delayAnswer);
     },
-
+    // Funzione molto simile alla funzione sopra per pushare il messaggio dell'utente solo che stavolta il messaggio è statico, ma il funzionamento è il solito, passiamo poi questo metodo nel setTimeout per farlo apparire solo poco dopo l'invio di un nostro messaggio.
     autoAnswer(i) {
       this.contacts[i].messages.push({
         ...this.autoMsg,
@@ -240,14 +248,9 @@ const app = new Vue({
         ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
       });
     },
-
-    showDropDown(msg) {
-      msg.isDropdownShown = !msg.isDropdownShown;
-      console.log(msg);
-    },
-
+    //Metodo per la ricerca degli amici in friendlist tramite l'input text cicliamo l'array di oggetti contatti, mettendo tutti in minuscolo con il "toLowerCase", poi vediamo se il testo (le lettere) scritto nel search (preso dall'HTML con la chiave sopra nei data) è incluso nell'array di oggetti.name ovviamente e cambiamo la chiave visible che è all'interno dell'oggetto per poter poi assegnargli una classe dinamica nel HTML che lo fa mostrare o meno a seconda appunto del valore della chiave visible.
     searchFriend() {
-      console.log(this.search);
+      // console.log(this.search);
       this.contacts.forEach((e, i) => {
         if (
           this.contacts[i].name
@@ -260,25 +263,21 @@ const app = new Vue({
         }
       });
     },
+    // Metodo per cambiare lo stato della "variabile", in modo tale che ogni volta che clicco cambia da true e false
+    showDropDown(msg) {
+      msg.isDropdownShown = !msg.isDropdownShown;
+      console.log(msg);
+    },
   },
+  // Created per ciclare il dropdown ed assegnarlo ad ogni messaggio individualmente in maniera dinamica. Doppio ciclo innestato per entrare prima nel array di oggetti contacts e poi per entrare nei messages dei contacts dove vorremo pushare...
   created() {
     this.contacts.forEach((contact, i) => {
       // console.log(contact);
       contact.messages.forEach((message) => {
         message.isDropdownShown = false;
       });
+      console.log(contact);
     });
-    // console.log(this.contacts);
-    // // for (let i = 0; i < this.contacts.length; i++) {
-    // //   // this.obj = this.contacts[i];
-    // //   // console.log(this.obj);
-    // //   console.log(this.contacts);
-    // // for (let y = 0; y < this.obj.messages[this.obj.messages.length]; y++) {
-    // //   menuOpen = false;
-    // // }
-    // // console.log(this.obj.messages[this.obj.messages.length]);
-    // // }
-    // // // console.log(this.obj[this.obj.message.length].message);
   },
 });
 

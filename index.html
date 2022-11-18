@@ -28,6 +28,7 @@
 
 <body>
   <div id="root" class="container" v-cloak>
+
     <!-- Left Side / Profile, FriendList -->
     <div class="column">
       <!-- Profile -->
@@ -81,8 +82,10 @@
       </div>
     </div>
 
+
     <!-- Right side / Active Chat -->
     <div class="messages">
+      <!-- Top Active/Selected Friend -->
       <div class="active-friend">
         <div class="user-info">
           <div class="friend" v-for="(item, index) in contacts" :key="item.avatar"
@@ -103,6 +106,7 @@
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
       </div>
+      <!-- Chat/Clouds message container -->
       <div class="chat-container">
         <div class="chat" v-for="(item, index) in contacts" :key="item.avatar" :class="{active: index === activeIndex}">
           <ul>
@@ -126,13 +130,14 @@
           </ul>
         </div>
       </div>
-      <!-- È corretto fare il v-for anche qui per "syncare" ciò che scrivo alla casella chat di chi ho selezionato sulla sinistra? -->
+      <!-- Text Area / Send Messages -->
       <div class="write" v-for="(objs, i) in contacts" :key="objs.avatar" :class="{active: i === activeIndex}">
         <i class="fa-regular fa-face-smile"></i>
         <input type="text" placeholder="Scrivi un messaggio" @keyup.enter="newMessage(i), autoAnswerTimer(i)"
           v-model="msg.message">
         <i class="fa-solid fa-microphone"></i>
       </div>
+      <!-- È corretto fare il v-for anche qui per "syncare" ciò che scrivo alla casella chat di chi ho selezionato sulla sinistra? -->
     </div>
   </div>
 </body>
