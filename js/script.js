@@ -37,8 +37,8 @@ const app = new Vue({
             date: "10/01/2020 15:30:55",
             message: "Hai portato a spasso il cane?",
             status: "sent",
-            isDropdownShown: false,
-            //TODO: Da togliere a Henri con il create non funziona ma se lo metto qui, e quindi la pagina lo trova subito allora è reattivo come dovrebbe, mentre col created si vede, cambia nella console, viene aggiunto il true e il false, ma no è reattivo.
+            // isDropdownShown: false,
+            // //TODO: Da togliere a Henri con il create non funziona ma se lo metto qui, e quindi la pagina lo trova subito allora è reattivo come dovrebbe, mentre col created si vede, cambia nella console, viene aggiunto il true e il false, ma no è reattivo.
           },
           {
             date: "10/01/2020 15:50:00",
@@ -218,6 +218,11 @@ const app = new Vue({
     // obj: {}, (not work)
   },
   methods: {
+    //Funzione della libreria Luxon per le date
+    getTime() {
+      return luxon.DateTime.now().toFormat("dd/MM/yyyy HH:mm:ss");
+    },
+
     //Metodo per prendere il messaggio scritto dall'utente reale nella textarea dei messaggi, creare un oggetto, esploderlo e pusharlo nell'array dei messaggi. Si passa come argomento l'indice preso dal ciclo nell'HTML, così da sarepre in quale iesimo contatto pushare il messaggio.
     newMessage(i) {
       if (this.msg.message.trim()) {
@@ -226,29 +231,24 @@ const app = new Vue({
         this.msg.message = this.msg.message.trim();
         this.contacts[i].messages.push({
           ...this.msg,
-          date: `${this.data.getDate()}/${this.data.getMonth()}/${this.data.getFullYear()} 
-          ${("0" + this.data.getHours()).slice(-2)}:${(
-            "0" + this.data.getMinutes()
-          ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
+          date: this.getTime(),
         });
         this.msg.message = "";
       }
     },
+
     // SetTimeout per la risposta automatica del computer, sempre passare come argomento l'indice preso dall'HTML per sapere dove mandare il messaggio
     autoAnswerTimer(i) {
       setTimeout(() => this.autoAnswer(i), this.delayAnswer);
     },
+
     // Funzione molto simile alla funzione sopra per pushare il messaggio dell'utente solo che stavolta il messaggio è statico, ma il funzionamento è il solito, passiamo poi questo metodo nel setTimeout per farlo apparire solo poco dopo l'invio di un nostro messaggio.
     autoAnswer(i) {
-      this.contacts[i].messages.push({
-        ...this.autoMsg,
-        date: `${this.data.getDate()}/${this.data.getMonth()}/${this.data.getFullYear()} 
-        ${("0" + this.data.getHours()).slice(-2)}:${(
-          "0" + this.data.getMinutes()
-        ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
-      });
+      this.contacts[i].messages.push({ ...this.autoMsg, date: this.getTime() });
     },
+
     //Metodo per la ricerca degli amici in friendlist tramite l'input text cicliamo l'array di oggetti contatti, mettendo tutti in minuscolo con il "toLowerCase", poi vediamo se il testo (le lettere) scritto nel search (preso dall'HTML con la chiave sopra nei data) è incluso nell'array di oggetti.name ovviamente e cambiamo la chiave visible che è all'interno dell'oggetto per poter poi assegnargli una classe dinamica nel HTML che lo fa mostrare o meno a seconda appunto del valore della chiave visible.
+
     searchFriend() {
       // console.log(this.search);
       this.contacts.forEach((e, i) => {
@@ -264,19 +264,20 @@ const app = new Vue({
       });
     },
     // Metodo per cambiare lo stato della "variabile", in modo tale che ogni volta che clicco cambia da true e false
-    showDropDown(msg) {
+    showDropDown: async function (msg) {
       msg.isDropdownShown = !msg.isDropdownShown;
+      await this.$nextTick();
       console.log(msg);
     },
   },
-  // Created per ciclare il dropdown ed assegnarlo ad ogni messaggio individualmente in maniera dinamica. Doppio ciclo innestato per entrare prima nel array di oggetti contacts e poi per entrare nei messages dei contacts dove vorremo pushare...
+  // Created per ciclare il dropdown ed assegnarlo ad ogni messaggio individualmente in maniera dinamica. Doppio ciclo innestato per entrare prima nel array di oggetti contacts e poi per entrare nei messages dei contacts dove vorremo mettere la nuova chiave valore
   created() {
     this.contacts.forEach((contact, i) => {
       // console.log(contact);
       contact.messages.forEach((message) => {
         message.isDropdownShown = false;
       });
-      console.log(contact);
+      // console.log(contact);
     });
   },
 });
@@ -293,3 +294,9 @@ const app = new Vue({
 //     this.contacts[i].visible = false;
 //   }
 // }
+
+// Data brutta fatta a mano con JS
+// `${this.data.getDate()}/${this.data.getMonth()}/${this.data.getFullYear()}
+// ${("0" + this.data.getHours()).slice(-2)}:${(
+//   "0" + this.data.getMinutes()
+// ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,

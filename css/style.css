@@ -29,6 +29,7 @@ input:focus {
   --height-profiles: 50px;
   --padding: 10px;
   --margin-right-icon: 15px;
+  --i-fontsize: 20px;
   display: flex;
   height: 90vh;
   min-width: 900px;
@@ -113,9 +114,9 @@ input:focus {
 }
 
 .search i {
-  font-size: 20px; /*TODO: creare variabile per farli tutti uguali  */
   margin-right: var(--margin-right-icon);
   margin-left: 15px;
+  font-size: var(--i-fontsize);
 }
 
 .search input {
@@ -238,6 +239,8 @@ input:focus {
   max-width: 50%;
   padding: 20px;
   border-radius: 20px;
+  overflow-wrap: break-word;
+  /* Per fare andare a capo anche parole lunghissime una colta raggiunte le max dim. del container*/
 }
 
 .msg-cloud p {
