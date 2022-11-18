@@ -37,7 +37,8 @@ li {
   display: flex;
   height: 90vh;
   min-width: 900px;
-  width: 1400px;
+  width: 75%;
+  /* Boh, a me piace di più in percentuale, dato che è un app, più che altro perchè ho il secondo monitor con una risoluzione più alta e mi sembrava troppo "schiacciato con 1400px di larghjezza, mentre sun un 1080p normale andava anche bene... chiedere consiglio*/
   margin: auto;
 }
 

@@ -196,6 +196,7 @@ const app = new Vue({
     search: "",
     // Oggetto vuoto per la prova di poushare lo status del dropdown dei messaggi
     // obj: {}, (not work)
+    isDropdownShown: "",
   },
   methods: {
     //Funzione della libreria Luxon per le date
@@ -244,9 +245,8 @@ const app = new Vue({
       });
     },
     // Metodo per cambiare lo stato della "variabile", in modo tale che ogni volta che clicco cambia da true e false
-    showDropDown: async function (msg) {
+    showDropDown(msg) {
       msg.isDropdownShown = !msg.isDropdownShown;
-      await this.$nextTick();
       console.log(msg);
     },
   },
@@ -255,7 +255,7 @@ const app = new Vue({
     this.contacts.forEach((contact, i) => {
       // console.log(contact);
       contact.messages.forEach((message) => {
-        message.isDropdownShown = false;
+        Vue.set((message, this.isDropdownShown, false));
       });
       // console.log(contact);
     });
