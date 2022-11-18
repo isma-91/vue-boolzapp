@@ -23,6 +23,10 @@ input:focus {
   outline: none;
 }
 
+li {
+  list-style-type: none;
+}
+
 .container {
   --bkgc-profiles: #eaeaea;
   --top-icons-color: #b6bbc4;
@@ -225,7 +229,7 @@ input:focus {
   display: block;
 }
 
-.chat li {
+.msg-cloud-container {
   display: flex;
   list-style-type: none;
   margin: 2rem 0;
@@ -261,19 +265,22 @@ input:focus {
 
 .select {
   position: absolute;
-  top: 100%;
-  right: 10px;
+  top: 90%;
+  right: 0px;
   width: max-content;
   display: none;
   background-color: white;
   border: 1px solid lightgray;
-  box-shadow: 2px 2px 2px grey;
-  padding: 1rem;
+  box-shadow: 0 0 10px grey;
   z-index: 11;
 }
 
-.select p {
-  line-height: 2rem;
+.select li {
+  padding: 1.5rem;
+}
+.select li:hover {
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
 }
 
 .select.show {
