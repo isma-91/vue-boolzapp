@@ -17,8 +17,6 @@ const app = new Vue({
             date: "10/01/2020 15:30:55",
             message: "Hai portato a spasso il cane?",
             status: "sent",
-            // isDropdownShown: false,
-            // //TODO: Da togliere a Henri con il create non funziona ma se lo metto qui, e quindi la pagina lo trova subito allora è reattivo come dovrebbe, mentre col created si vede, cambia nella console, viene aggiunto il true e il false, ma no è reattivo.
           },
           {
             date: "10/01/2020 15:50:00",
@@ -196,7 +194,6 @@ const app = new Vue({
     search: "",
     // Oggetto vuoto per la prova di poushare lo status del dropdown dei messaggi
     // obj: {}, (not work)
-    isDropdownShown: "",
   },
   methods: {
     //Funzione della libreria Luxon per le date
@@ -213,10 +210,12 @@ const app = new Vue({
         this.contacts[i].messages.push({
           ...this.msg,
           date: this.getTime(),
+          isDropdownShown: false,
         });
         this.msg.message = "";
       }
     },
+    //TODO: Sia qui nei nuovi messaggi che nella risposta automatica del computer ho dovuto mettere manualmente il "isDropdownShown: false" è così che va fatto per forza, o cè un modo "dinamico"?
 
     // SetTimeout per la risposta automatica del computer, sempre passare come argomento l'indice preso dall'HTML per sapere dove mandare il messaggio
     autoAnswerTimer(i) {
@@ -225,7 +224,11 @@ const app = new Vue({
 
     // Funzione molto simile alla funzione sopra per pushare il messaggio dell'utente solo che stavolta il messaggio è statico, ma il funzionamento è il solito, passiamo poi questo metodo nel setTimeout per farlo apparire solo poco dopo l'invio di un nostro messaggio.
     autoAnswer(i) {
-      this.contacts[i].messages.push({ ...this.autoMsg, date: this.getTime() });
+      this.contacts[i].messages.push({
+        ...this.autoMsg,
+        date: this.getTime(),
+        isDropdownShown: false,
+      });
     },
 
     //Metodo per la ricerca degli amici in friendlist tramite l'input text cicliamo l'array di oggetti contatti, mettendo tutti in minuscolo con il "toLowerCase", poi vediamo se il testo (le lettere) scritto nel search (preso dall'HTML con la chiave sopra nei data) è incluso nell'array di oggetti.name ovviamente e cambiamo la chiave visible che è all'interno dell'oggetto per poter poi assegnargli una classe dinamica nel HTML che lo fa mostrare o meno a seconda appunto del valore della chiave visible.
@@ -247,7 +250,11 @@ const app = new Vue({
     // Metodo per cambiare lo stato della "variabile", in modo tale che ogni volta che clicco cambia da true e false
     showDropDown(msg) {
       msg.isDropdownShown = !msg.isDropdownShown;
-      console.log(msg);
+      // console.log(msg);
+    },
+
+    deleteMessage(item, i) {
+      item.splice(i, 1);
     },
   },
   // Created per ciclare il dropdown ed assegnarlo ad ogni messaggio individualmente in maniera dinamica. Doppio ciclo innestato per entrare prima nel array di oggetti contacts e poi per entrare nei messages dei contacts dove vorremo mettere la nuova chiave valore
@@ -255,7 +262,7 @@ const app = new Vue({
     this.contacts.forEach((contact, i) => {
       // console.log(contact);
       contact.messages.forEach((message) => {
-        Vue.set((message, this.isDropdownShown, false));
+        Vue.set(message, "isDropdownShown", false);
       });
       // console.log(contact);
     });
