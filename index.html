@@ -38,7 +38,11 @@
           <div class="user-img">
             <img src="img/user.jpg" alt="">
           </div>
-          <span class="bold">Jon Snow</span>
+          <div class="user-name">
+            <span class="bold">Jon Snow</span>
+            <p class="writing" :class="{active: isWriting == true}">Sta scrivendo...</p>
+          </div>
+
         </div>
         <div class="functions">
           <i class="fa-solid fa-circle-notch"></i>
@@ -134,8 +138,8 @@
       <!-- Text Area / Send Messages -->
       <div class="write" v-for="(objs, i) in contacts" :key="objs.avatar" :class="{active: i === activeIndex}">
         <i class="fa-regular fa-face-smile"></i>
-        <input type="text" placeholder="Scrivi un messaggio" @keyup.enter="newMessage(i), autoAnswerTimer(i)"
-          v-model="msg.message">
+        <input type="text" placeholder="Scrivi un messaggio" @keyup="showWriting"
+          @keyup.enter="newMessage(i), autoAnswerTimer(i)" v-model="msg.message">
         <i class="fa-solid fa-microphone"></i>
       </div>
       <!-- È corretto fare il v-for anche qui per "syncare" ciò che scrivo alla casella chat di chi ho selezionato sulla sinistra? -->

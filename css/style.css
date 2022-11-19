@@ -27,6 +27,14 @@ li {
   list-style-type: none;
 }
 
+.last-message,
+.list-date,
+.user-name p {
+  color: #bbb9c0;
+  font-size: 0.8rem;
+}
+/* FINE GENERALS */
+
 .container {
   --bkgc-profiles: #eaeaea;
   --top-icons-color: #b6bbc4;
@@ -70,6 +78,7 @@ li {
 
 .user-info {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -83,6 +92,14 @@ li {
   width: 100%;
   border-radius: 100px;
   overflow: hidden;
+}
+
+.writing {
+  display: none;
+}
+
+.writing.active {
+  display: block;
 }
 
 .functions i {
@@ -175,12 +192,6 @@ li {
 .friend-box {
   line-height: 1.3rem;
   flex: 1 1 auto;
-}
-
-.last-message,
-.list-date {
-  color: #bbb9c0;
-  font-size: 0.8rem;
 }
 
 .messages {

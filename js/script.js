@@ -194,6 +194,9 @@ const app = new Vue({
     search: "",
     // Oggetto vuoto per la prova di poushare lo status del dropdown dei messaggi
     // obj: {}, (not work)
+
+    isWriting: false,
+    needAnswer: true,
   },
   methods: {
     //Funzione della libreria Luxon per le date
@@ -203,7 +206,7 @@ const app = new Vue({
 
     //Metodo per prendere il messaggio scritto dall'utente reale nella textarea dei messaggi, creare un oggetto, esploderlo e pusharlo nell'array dei messaggi. Si passa come argomento l'indice preso dal ciclo nell'HTML, così da sarepre in quale iesimo contatto pushare il messaggio.
     newMessage(i) {
-      if (this.msg.message.trim()) {
+      if (this.msg.message.trim() !== "") {
         // console.log(this.msg.message);
         // console.log(this.data.getHours());
         this.msg.message = this.msg.message.trim();
@@ -212,14 +215,20 @@ const app = new Vue({
           date: this.getTime(),
           isDropdownShown: false,
         });
-        this.msg.message = "";
+      } else {
+        return (this.needAnswer = false);
       }
+      this.msg.message = "";
     },
     //TODO: Sia qui nei nuovi messaggi che nella risposta automatica del computer ho dovuto mettere manualmente il "isDropdownShown: false" è così che va fatto per forza, o cè un modo "dinamico"?
 
     // SetTimeout per la risposta automatica del computer, sempre passare come argomento l'indice preso dall'HTML per sapere dove mandare il messaggio
     autoAnswerTimer(i) {
-      setTimeout(() => this.autoAnswer(i), this.delayAnswer);
+      if (this.needAnswer === true) {
+        setTimeout(() => this.autoAnswer(i), this.delayAnswer);
+      } else {
+        this.needAnswer = true;
+      }
     },
 
     // Funzione molto simile alla funzione sopra per pushare il messaggio dell'utente solo che stavolta il messaggio è statico, ma il funzionamento è il solito, passiamo poi questo metodo nel setTimeout per farlo apparire solo poco dopo l'invio di un nostro messaggio.
@@ -250,11 +259,18 @@ const app = new Vue({
     // Metodo per cambiare lo stato della "variabile", in modo tale che ogni volta che clicco cambia da true e false
     showDropDown(msg) {
       msg.isDropdownShown = !msg.isDropdownShown;
-      // console.log(msg);
     },
 
     deleteMessage(item, i) {
       item.splice(i, 1);
+    },
+
+    showWriting() {
+      if (this.msg.message !== "") {
+        this.isWriting = true;
+      } else {
+        this.isWriting = false;
+      }
     },
   },
   // Created per ciclare il dropdown ed assegnarlo ad ogni messaggio individualmente in maniera dinamica. Doppio ciclo innestato per entrare prima nel array di oggetti contacts e poi per entrare nei messages dei contacts dove vorremo mettere la nuova chiave valore
