@@ -29,10 +29,21 @@ li {
 
 .last-message,
 .list-date,
-.user-name p {
+.writing {
   color: #bbb9c0;
   font-size: 0.8rem;
 }
+
+i:hover {
+  filter: brightness(1.1);
+  transform: scale(1.1);
+}
+
+/* img:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
+  cursor: pointer;
+} */
 /* FINE GENERALS */
 
 .container {
@@ -65,7 +76,6 @@ li {
 .messages {
   height: 100%;
   width: 70%;
-  background-color: salmon;
 }
 
 .user-profile {
@@ -74,6 +84,15 @@ li {
   align-items: center;
   background-color: var(--bkgc-profiles);
   padding: var(--padding);
+}
+
+.user-profile:hover {
+  cursor: pointer;
+}
+
+.user-profile:hover img {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
 }
 
 .user-info {
@@ -136,9 +155,10 @@ li {
 }
 
 .search i {
+  font-size: var(--i-fontsize);
+  color: var(--top-icons-color);
   margin-right: var(--margin-right-icon);
   margin-left: 15px;
-  font-size: var(--i-fontsize);
 }
 
 .search input {
@@ -177,6 +197,11 @@ li {
   background-color: rgb(233, 233, 233);
 }
 
+.column .friendlist li:hover img {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
+}
+
 .column .friendlist li.novisible {
   display: none;
 }
@@ -208,6 +233,15 @@ li {
   height: var(--active-friend-height);
   background-color: var(--bkgc-profiles);
   position: relative;
+}
+
+.active-friend:hover {
+  cursor: pointer;
+}
+
+.active-friend:hover img {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
 }
 
 .active-friend img {

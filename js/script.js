@@ -204,7 +204,7 @@ const app = new Vue({
       return luxon.DateTime.now().toFormat("dd/MM/yyyy HH:mm:ss");
     },
 
-    //Metodo per prendere il messaggio scritto dall'utente reale nella textarea dei messaggi, creare un oggetto, esploderlo e pusharlo nell'array dei messaggi. Si passa come argomento l'indice preso dal ciclo nell'HTML, così da sarepre in quale iesimo contatto pushare il messaggio.
+    //Metodo per prendere il messaggio scritto dall'utente reale nella textarea dei messaggi, creare un oggetto, esploderlo e pusharlo nell'array dei messaggi. Si passa come argomento l'indice preso dal ciclo nell'HTML, così da sarepre in quale iesimo contatto pushare il messaggio. Con cotrollo per verificare che non venga immessa una stringa vuota, se l'utente cerca di inviare un messaggio stringa vuota, il messaggio non verrà inviato e verrà cambiato il valore alla variabile "needAnswer" in false per far sì che non parta nemmeno la risposta automatica del computer.
     newMessage(i) {
       if (this.msg.message.trim() !== "") {
         // console.log(this.msg.message);
@@ -222,7 +222,7 @@ const app = new Vue({
     },
     //TODO: Sia qui nei nuovi messaggi che nella risposta automatica del computer ho dovuto mettere manualmente il "isDropdownShown: false" è così che va fatto per forza, o cè un modo "dinamico"?
 
-    // SetTimeout per la risposta automatica del computer, sempre passare come argomento l'indice preso dall'HTML per sapere dove mandare il messaggio
+    // SetTimeout per la risposta automatica del computer, sempre passare come argomento l'indice preso dall'HTML per sapere dove mandare il messaggio. Con controllo per verificare se l'altro ha effettivamente inviato un messaggio. Utilizzando una variabile impostata da noi di default su true, la facciamo cambiare in false, mel metodo sopra, se l'utente invia un messaggio stringa vuota, quindi se questa variabile è false parte il timer per la risposta automatica, altrimenti non parte nulla e risetta la variabile detta prima su true per i prossimi messaggi.
     autoAnswerTimer(i) {
       if (this.needAnswer === true) {
         setTimeout(() => this.autoAnswer(i), this.delayAnswer);
@@ -231,7 +231,7 @@ const app = new Vue({
       }
     },
 
-    // Funzione molto simile alla funzione sopra per pushare il messaggio dell'utente solo che stavolta il messaggio è statico, ma il funzionamento è il solito, passiamo poi questo metodo nel setTimeout per farlo apparire solo poco dopo l'invio di un nostro messaggio.
+    // Metodo molto simile al metodo sopra per pushare il messaggio dell'utente solo che stavolta il messaggio è statico, ma il funzionamento è il solito, passiamo poi questo metodo nel setTimeout per farlo apparire solo poco dopo l'invio di un nostro messaggio.
     autoAnswer(i) {
       this.contacts[i].messages.push({
         ...this.autoMsg,
@@ -241,7 +241,6 @@ const app = new Vue({
     },
 
     //Metodo per la ricerca degli amici in friendlist tramite l'input text cicliamo l'array di oggetti contatti, mettendo tutti in minuscolo con il "toLowerCase", poi vediamo se il testo (le lettere) scritto nel search (preso dall'HTML con la chiave sopra nei data) è incluso nell'array di oggetti.name ovviamente e cambiamo la chiave visible che è all'interno dell'oggetto per poter poi assegnargli una classe dinamica nel HTML che lo fa mostrare o meno a seconda appunto del valore della chiave visible.
-
     searchFriend() {
       // console.log(this.search);
       this.contacts.forEach((e, i) => {
@@ -256,15 +255,18 @@ const app = new Vue({
         }
       });
     },
+
     // Metodo per cambiare lo stato della "variabile", in modo tale che ogni volta che clicco cambia da true e false
     showDropDown(msg) {
       msg.isDropdownShown = !msg.isDropdownShown;
     },
 
+    // Metodo per cancellare il messaggio con il dropdown
     deleteMessage(item, i) {
       item.splice(i, 1);
     },
 
+    // Metodo per far apparire la scritta "sto scrivendo mentre scriviamo qualcosa nella textarea, cambiando il valore della proprietà esressa nei data."
     showWriting() {
       if (this.msg.message !== "") {
         this.isWriting = true;
@@ -273,6 +275,7 @@ const app = new Vue({
       }
     },
   },
+
   // Created per ciclare il dropdown ed assegnarlo ad ogni messaggio individualmente in maniera dinamica. Doppio ciclo innestato per entrare prima nel array di oggetti contacts e poi per entrare nei messages dei contacts dove vorremo mettere la nuova chiave valore
   created() {
     this.contacts.forEach((contact, i) => {
@@ -284,6 +287,9 @@ const app = new Vue({
     });
   },
 });
+
+///////////////////////////////////////////////////////////////////////////////////
+// APPUNTI / ALTERNATIVE
 
 // Ciclo Brutto
 // for (let i = 0; i < this.contacts.length; i++) {
@@ -303,3 +309,8 @@ const app = new Vue({
 // ${("0" + this.data.getHours()).slice(-2)}:${(
 //   "0" + this.data.getMinutes()
 // ).slice(-2)}:${("0" + this.data.getSeconds()).slice(-2)}`,
+
+// Data Bella base con JS
+// date: new Date();
+// date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
+// '19/11/2022 10:25:41
