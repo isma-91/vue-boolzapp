@@ -76,11 +76,14 @@
             <div class="friend-box">
               <div class="name-date">
                 <span class="bold">{{ item.name }}</span>
-                <span class="list-date">{{ item.messages[item.messages.length - 1].date}}</span>
+                <span class="list-date">
+                  {{ item.messages.length ? item.messages[item.messages.length - 1].date : 'Nessun Messaggio'}}
+                </span>
               </div>
 
               <p class="last-message">
-                {{ item.messages[item.messages.length - 1].message }}</p>
+                {{ item.messages.length ? item.messages[item.messages.length - 1].message : 'Nessun Messaggio'}}
+              </p>
             </div>
           </li>
         </ul>
@@ -99,7 +102,7 @@
             <div>
               <p class="bold">{{ item.name }}</p>
               <p class="list-date">
-                Ultimo accesso il {{ item.messages[item.messages.length - 1].date}}
+                Ultimo accesso il {{ item.messages.length ? item.messages[item.messages.length - 1].date : ''}}
               </p>
             </div>
 
