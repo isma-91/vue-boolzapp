@@ -108,6 +108,7 @@ i:hover {
 }
 
 .user-img img {
+  flex: 0 0 auto;
   width: 100%;
   border-radius: 100px;
   overflow: hidden;
@@ -207,6 +208,7 @@ i:hover {
 }
 
 .column .friendlist img {
+  flex: 0 0 auto;
   height: var(--height-profiles);
   margin-right: var(--margin-right-icon);
   border-radius: 100px;
@@ -245,6 +247,7 @@ i:hover {
 }
 
 .active-friend img {
+  flex: 0 0 auto;
   height: var(--height-profiles);
   margin-right: var(--margin-right-icon);
   border-radius: 100px;
